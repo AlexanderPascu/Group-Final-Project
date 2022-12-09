@@ -26,16 +26,16 @@ public class PizzaPOS
 		int numberOfToppings = 0;			//number of toppings
 
 		//prompt user and get first name
-		System.out.println("Welcome to Mike and Diane's Pizza");
+		System.out.println("Welcome to Jack and Diane's Pizza");
 		System.out.print("Enter your first name:  ");
 		firstName = scan.nextLine();
 
 		//determine if user is eligible for discount by
 		//having the same first name as one of the owners
 
-		if (firstName.equalsIgnoreCase("Diane") || firstName.equalsIgnoreCase("Mike"))
+		if (firstName.equalsIgnoreCase("Diane") || firstName.equalsIgnoreCase("Jack"))
 		{
-			//ADD LINES HERE FOR TASK #1
+			discount = true;
 		}
 
 		//prompt user and get pizza size choice
@@ -49,8 +49,26 @@ public class PizzaPOS
 		inches = scan.nextInt();
 
 		//set price and size of pizza ordered using "if" statements
-
-
+    if (inches == 10)
+    {
+      cost = 10.99;
+    }
+    else if (inches == 12)
+    {
+      cost = 12.99;
+    }
+    else if (inches == 14)
+    {
+      cost = 14.99;
+    }
+    else if (inches == 16)
+    {
+      cost = 16.99;
+    }
+    else
+    {
+      System.out.println("Not an option therfore a 12 inch pizza will be made");
+    }
 
 		//prompt user and get crust choice, store first character of
 		//input string into a primitive type "char" variable.
@@ -62,8 +80,22 @@ public class PizzaPOS
 
 		//set user's crust choice on pizza ordered
 		//ADD LINES FOR TASK #2
-
-
+    if (crustType == 'H' || crustType == 'h')
+    {
+      crust = "Hand-tossed";
+    }
+    else if (crustType == 'T' || crustType == 't')
+    {
+      crust = "Thin-crust";
+    }
+    else if (crustType == 'D' || crustType == 'd')
+    {
+      crust = "Deep-dish";
+    }
+    else
+    {
+      System.out.println("Not an option therefore Hand-tossed crust will be made");
+    }
 
 		//prompt user and get topping choices one at a time
 		System.out.println("All pizzas come with cheese.");
@@ -81,8 +113,31 @@ public class PizzaPOS
 			numberOfToppings += 1;
 			toppings = toppings + "Pepperoni ";
 		}
-
-	    //prompt user for Sausage, Onion and Mushroom choices
+    System.out.print("Do you want Sausage?  (Y/N):  ");
+        input = scan.next();
+        choice = input.charAt(0);
+        if (choice == 'Y' || choice == 'y')
+		{
+			numberOfToppings += 1;
+			toppings = toppings + "Suasage ";
+		}
+		System.out.print("Do you want Onion?  (Y/N):  ");
+        input = scan.next();
+        choice = input.charAt(0);
+        if (choice == 'Y' || choice == 'y')
+		{
+			numberOfToppings += 1;
+			toppings = toppings + "Onion ";
+		}
+		System.out.print("Do you want Mushroom?  (Y/N):  ");
+        input = scan.next();
+        choice = input.charAt(0);
+        if (choice == 'Y' || choice == 'y')
+		{
+			numberOfToppings += 1;
+			toppings = toppings + "Mushroom ";
+		}
+	   //prompt user for Sausage, Onion and Mushroom choices
 
 		//add additional toppings cost to cost of pizza
 		cost = cost + (1.25*numberOfToppings);
@@ -93,18 +148,24 @@ public class PizzaPOS
 		System.out.println(inches + " inch pizza");
 		System.out.println(crust + " crust");
 		System.out.println(toppings);
-
+    
 		//apply discount if user is elibible
-		//ADD LINES FOR TASK #3 HERE
+		if (discount){
+		  System.out.println("You are eligible for a 2 dollar discount!");
+		  cost--;
+		  cost--;
+		}
 
 		//EDIT PROGRAM FOR TASK #4
+		NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.US);
 		//SO ALL MONEY OUTPUT APPEARS WITH 2 DECIMAL PLACES
-		System.out.println("The cost of your order is: $" + cost);
+		System.out.println("The cost of your order is: " + formatter.format(cost));
 
 		//calculate and display tax and total cost
 		tax = cost * TAX_RATE;
-		System.out.println("The tax is:  $" + tax);
-		System.out.println("The total due is:  $" + (tax+cost));
+		System.out.println("The tax is:  " + formatter.format(tax));
+		double end = tax + cost;
+		System.out.println("The total due is:  " + formatter.format(end));
 
 		System.out.println("Your order will be ready for pickup in 30 minutes.");
 	}
