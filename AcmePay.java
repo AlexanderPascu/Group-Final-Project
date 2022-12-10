@@ -26,6 +26,7 @@ public class AcmePay {
         double gross = grossPay(rate, hours);
         double roundedRate;
         
+        System.out.println("Shift worked: " + shift);
         System.out.println("Hours worked: " + hours);
         roundedRate = Math.round(rate*100.0)/100.0;
         System.out.println("Hourly pay rate: $" + roundedRate);
