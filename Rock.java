@@ -21,7 +21,7 @@ public static void main(String[] args)
     System.out.println ("Enter R for Rock, P for Paper, S for Scissors: "); 
     personPlay = scan.next();
     personPlay = personPlay.toUpperCase();
-    personPlay = personPlay + "a";
+    personPlay = personPlay + "x";
     personPlay = personPlay.substring(0,2);
     computerInt = generator.nextInt(3);
     count++;
