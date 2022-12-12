@@ -1,5 +1,5 @@
 import java.util.*;
-import java.lang.Math;
+
 public class AcmePay {
     public static void main(String[] args) throws Exception 
     {
@@ -7,8 +7,6 @@ public class AcmePay {
         Scanner input = new Scanner(System.in);
         System.out.println("Please enter shift - 1 , 2 , or 3");
         int shift = input.nextInt();
-
-        
 
       //ask for hours worked
       System.out.println("How many hours have you worked?");
@@ -21,25 +19,21 @@ public class AcmePay {
       
       System.out.println("Would you like to participate in our retirement plan? Enter 1 for yes.");
         int choice = input.nextInt();
+      
       }
         double rate = payRate (shift);
         double gross = grossPay(rate, hours);
-        double roundedRate;
+      
         
         System.out.println("Shift worked: " + shift);
-        System.out.println("Hours worked: " + hours);
-        roundedRate = Math.round(rate*100.0)/100.0;
-        System.out.println("Hourly pay rate: $" + roundedRate);
-        roundedRate = Math.round(rate*100.0)/100.0;
+    
+        
+        System.out.println("Hourly pay rate: $" + rate);
+       
         hoursBreakdown(rate, hours);
         retirementPay(shift, retire, gross);
-    
     }
-
-    /**
-     * @param shift
-     * @return 
-     */
+ 
     public static double payRate (int shift)
     {
         //fill in the details 
@@ -63,7 +57,7 @@ public class AcmePay {
     {
         //fill in details    
         double overtime;
-
+        System.out.println("Hours worked: " + hours);
         if (hours > 40)
         {
           overtime = (((hours-40)*rate)*1.5);
@@ -73,47 +67,51 @@ public class AcmePay {
           overtime = 0;
         }
         System.out.println("Overtime hours worked: " + (int) (hours - 40));
-        double roundedOvertime = Math.round(overtime*100.0)/100.0;
-        System.out.println("Overtime pay: $" + (roundedOvertime));
+        
+        System.out.println("Overtime pay: $" + (overtime));
     }
-
+      
     public static double grossPay(double rate, double hours)
     {
         //fill in details 
-        double roundedGross;
-        double pay = (rate*hours);
-        double grossPay = rate*hours;
-        roundedGross = Math.round(grossPay*100.0)/100.0;
-        System.out.println("Gross pay: $" + roundedGross);
-        return pay;
-    }
-
-    public static void retirementPay(int shift ,int choice, double gross)
-    {
-        //fill in details
-        double retire;
-        double roundedRetire;
-        double roundedNetpay;
-        double netPay = gross;
-        if (choice == 1)
+        
+        double overtime;
+        if (hours > 40)
         {
-        netPay = gross*.97;
-        retire = netPay*.03;
-        roundedRetire = Math.round(retire*100.0)/100.0;
-        System.out.println("Retirement Deduction: $" + roundedRetire);
-        roundedNetpay = Math.round(netPay*100.0)/100.0;
-
-        System.out.println("Net Pay: $" + roundedNetpay);
+          overtime = (((hours-40)*rate)*1.5);
         }
         else 
         {
-            roundedNetpay = 1;
+          overtime = 0;
+        }
+        double pay = (rate*hours);
+        double gross = (pay + overtime);
+
+       
+        
+        //System.out.println("Gross pay: $" + gross);
+        return pay;
+    }
+
+    public static void retirementPay(int shift, int choice, double gross)
+    {
+        //fill in details
+        double retire = 0;
+        double netPay = gross;
+        
+        if (shift != 1 && choice == 1)
+        {
+        netPay = gross*.97;
+        retire = gross*.03;
+        }
+        else if (shift==1||choice !=1)
+        {   
             retire = 0;
             netPay = gross;
-            System.out.println("Retirement Deduction is 0");
-            System.out.println("Net Pay: $" + roundedNetpay);
         }
-        
-        
+
+        System.out.println("Retirement Deduction: " + retire);
+        System.out.println("Net Pay: $" + netPay);
+      
     }
 }
