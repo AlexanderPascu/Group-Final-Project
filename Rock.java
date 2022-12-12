@@ -2,14 +2,10 @@ import java.util.Scanner;
 import java.util.Random;
 public class Rock
 {
-function getRandomInt() {
-    return Math.floor(Math.random() );
-}
 public static void main(String[] args)
 {
     String personPlay;
     String computerPlay;
-    int computerInt;
     int computerWins = 0;
     int playerWins = 0;
     int tieWins = 0;
@@ -17,13 +13,12 @@ public static void main(String[] args)
     do
     {
     Scanner scan = new Scanner(System.in);
-    Random generator = new Random();
     System.out.println ("Enter R for Rock, P for Paper, S for Scissors: "); 
     personPlay = scan.next();
     personPlay = personPlay.toUpperCase();
-    personPlay = personPlay + "x";
+    personPlay = personPlay + "a";
     personPlay = personPlay.substring(0,2);
-    computerInt = generator.nextInt(3);
+    int computerInt = (int)Math.random()*2;
     count++;
     switch (computerInt)
     {
